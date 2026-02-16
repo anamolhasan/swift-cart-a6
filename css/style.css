@@ -1,0 +1,56 @@
+#cart-btn:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s;
+}
+button:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================
+   Add to your style.css
+   ========================== */
+
+/* Modal overlay with blur */
+#product-modal {
+  backdrop-filter: blur(6px); /* blur the background */
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.3s ease;
+}
+
+/* Fade in animation for modal */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+#product-modal.flex {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Toast animation */
+#toast {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+@keyframes fadeInLeft {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  0% { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fadeInLeft { animation: fadeInLeft 1s ease forwards; }
+.animate-fadeInUp { animation: fadeInUp 1s ease forwards; }
+.animate-fadeInRight { animation: fadeInRight 1s ease forwards; }
