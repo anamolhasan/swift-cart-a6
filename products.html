@@ -1,11 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swift Cart | all product</title>
+  <meta charset="UTF-8">
+  <title>SwiftCart - Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<header class="bg-black text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-purple-400">SwiftCart</h1>
+    <nav class="hidden md:flex space-x-6">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div id="cart-btn" class="relative cursor-pointer">
+      🛒
+      <span id="cart-count" class="absolute -top-2 -right-3 bg-purple-500 text-xs px-2 rounded-full">0</span>
+    </div>
+  </div>
+</header>
+
+<!-- Cart Modal -->
+<div id="cart-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+  <div class="bg-white p-6 rounded w-[90%] md:w-1/2 relative max-h-[80vh] overflow-y-auto">
+    <button id="close-cart" class="absolute top-3 right-4 text-xl font-bold">✖</button>
+    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+    <div id="cart-items" class="space-y-4"></div>
+    <div class="mt-4 font-bold text-right">
+      Total: $<span id="cart-total">0</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Section -->
+<section class="py-10 max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+  
+  <!-- Left: Categories + Filter + Search -->
+  <div class="space-y-4">
+     <h2 class="text-xl font-bold">Categories</h2>
+
+  <!-- All Category Button -->
+  <div id="all-category" class="category-btn bg-purple-600 text-white px-4 py-2 rounded text-center cursor-pointer">
+    All Categories
+  </div>
+
+  <!-- Individual Categories -->
+  <div id="categories" class="flex flex-col gap-2"></div>
+
+    <h2 class="text-xl font-bold mt-6">Filter by Price</h2>
+    <select id="price-filter" class="border p-2 rounded w-full">
+      <option value="">All</option>
+      <option value="low">Low to High</option>
+      <option value="high">High to Low</option>
+    </select>
+
+    <h2 class="text-xl font-bold mt-6">Search</h2>
+    <input id="search-input" type="text" placeholder="Search products..."
+      class="border p-2 rounded w-full">
+  </div>
+
+  <!-- Right: Products Grid -->
+  <div id="products" class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <p id="loading" class="text-center col-span-full">Loading...</p>
+  </div>
+</section>
+
+<!-- Product Detail Modal -->
+<div id="modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+  <div class="bg-white p-6 rounded w-[90%] md:w-1/2 relative max-h-[80vh] overflow-y-auto">
+    <button onclick="closeModal()" class="absolute top-3 right-4 text-xl font-bold">✖</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+
+  <!-- ================= Footer ================= -->
+<footer class="bg-gray-900 text-gray-300 py-12  bottom-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+
+    <!-- Branding -->
+    <div class="flex flex-col gap-3 animate-fadeInLeft">
+      <h3 class="text-2xl font-extrabold tracking-wide text-white">SwiftCart</h3>
+      <p>© 2026 SwiftCart. All rights reserved.</p>
+      <p class="text-sm opacity-80">Your one-stop shop for trending fashion & electronics.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="animate-fadeInUp">
+      <h4 class="font-bold text-lg mb-3 border-b border-gray-700 pb-2">Quick Links</h4>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-indigo-500 transition-colors">Home</a></li>
+        <li><a href="#products" class="hover:text-indigo-500 transition-colors">Products</a></li>
+        <li><a href="#" class="hover:text-indigo-500 transition-colors">About</a></li>
+        <li><a href="#" class="hover:text-indigo-500 transition-colors">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Social & Contact -->
+    <div class="animate-fadeInRight">
+      <h4 class="font-bold text-lg mb-3 border-b border-gray-700 pb-2">Follow Us</h4>
+      <div class="flex items-center gap-4 mt-2">
+        <!-- Social Icons using SVG -->
+        <a href="#" class="hover:scale-110 transition-transform hover:text-indigo-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            <path d="M22.46 6c-.77.35-1.6.59-2.46.69a4.27 4.27 0 001.88-2.36 8.47 8.47 0 01-2.7 1.03 4.23 4.23 0 00-7.22 3.85A12 12 0 013 4.77a4.23 4.23 0 001.31 5.64 4.21 4.21 0 01-1.92-.53v.05a4.23 4.23 0 003.39 4.14 4.27 4.27 0 01-1.91.07 4.23 4.23 0 003.95 2.94A8.48 8.48 0 012 19.54a11.96 11.96 0 006.29 1.84c7.55 0 11.68-6.25 11.68-11.68 0-.18 0-.35-.01-.53A8.36 8.36 0 0024 5.56a8.19 8.19 0 01-2.36.65 4.12 4.12 0 001.81-2.27z"/>
+          </svg>
+        </a>
+        <a href="#" class="hover:scale-110 transition-transform hover:text-indigo-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.97.25 2.43.416a4.92 4.92 0 011.7 1.02 4.92 4.92 0 011.02 1.7c.166.46.36 1.26.416 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.25 1.97-.416 2.43a4.92 4.92 0 01-1.02 1.7 4.92 4.92 0 01-1.7 1.02c-.46.166-1.26.36-2.43.416-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.25-2.43-.416a4.92 4.92 0 01-1.7-1.02 4.92 4.92 0 01-1.02-1.7c-.166-.46-.36-1.26-.416-2.43C2.212 15.584 2.2 15.2 2.2 12s.012-3.584.07-4.85c.056-1.17.25-1.97.416-2.43a4.92 4.92 0 011.02-1.7 4.92 4.92 0 011.7-1.02c.46-.166 1.26-.36 2.43-.416C8.416 2.212 8.8 2.2 12 2.2zm0 1.8c-3.16 0-3.536.012-4.78.07-1.096.05-1.692.23-2.086.384a3.12 3.12 0 00-1.15.725 3.12 3.12 0 00-.725 1.15c-.154.394-.334.99-.384 2.086-.058 1.244-.07 1.62-.07 4.78s.012 3.536.07 4.78c.05 1.096.23 1.692.384 2.086a3.12 3.12 0 00.725 1.15 3.12 3.12 0 001.15.725c.394.154.99.334 2.086.384 1.244.058 1.62.07 4.78.07s3.536-.012 4.78-.07c1.096-.05 1.692-.23 2.086-.384a3.12 3.12 0 001.15-.725 3.12 3.12 0 00.725-1.15c.154-.394.334-.99.384-2.086.058-1.244.07-1.62.07-4.78s-.012-3.536-.07-4.78c-.05-1.096-.23-1.692-.384-2.086a3.12 3.12 0 00-.725-1.15 3.12 3.12 0 00-1.15-.725c-.394-.154-.99-.334-2.086-.384-1.244-.058-1.62-.07-4.78-.07zM12 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 1.8a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm6.406-.356a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="./js/cart.js"></script>
+<script src="./js/products.js"></script>
+<script src="./js/modal.js"></script>
+<script src="./js/main.js"></script>
+
+<script>
+// ------------------- Extra JS for filter & search -------------------
+const priceFilter = document.getElementById("price-filter");
+const searchInput = document.getElementById("search-input");
+
+let allProducts = [];
+
+async function loadAllProducts() {
+  const res = await fetch("https://fakestoreapi.com/products");
+  const data = await res.json();
+  allProducts = data;
+  renderProducts(allProducts);
+}
+
+function renderProducts(products) {
+  const container = document.getElementById("products");
+  if (!container) return;
+
+  if (products.length === 0) {
+    container.innerHTML = "<p class='col-span-full text-center'>No products found.</p>";
+    return;
+  }
+
+  container.innerHTML = products.map(product => `
+    <div class="bg-white p-4 rounded shadow flex flex-col justify-between">
+      <img src="${product.image}" class="h-40 mx-auto object-contain mb-2">
+      <span class="text-xs bg-gray-200 px-2 py-1 rounded">${product.category}</span>
+      <h3 class="font-semibold mt-2">${product.title.substring(0,40)}...</h3>
+      <p class="text-yellow-500">⭐ ${product.rating.rate}</p>
+      <p class="text-purple-600 font-bold">$${product.price}</p>
+      <div class="flex gap-2 mt-2">
+        <button onclick='showDetails(${JSON.stringify(product)})'
+          class="bg-blue-600 text-white px-3 py-1 rounded flex-1">Details</button>
+        <button onclick='addToCart(${JSON.stringify(product)})'
+          class="bg-purple-600 text-white px-3 py-1 rounded flex-1">Add</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+// Price Filter
+priceFilter.addEventListener("change", () => {
+  let filtered = [...allProducts];
+  if (priceFilter.value === "low") {
+    filtered.sort((a,b) => a.price - b.price);
+  } else if (priceFilter.value === "high") {
+    filtered.sort((a,b) => b.price - a.price);
+  }
+  // Also apply search filter
+  const search = searchInput.value.toLowerCase();
+  if (search) {
+    filtered = filtered.filter(p => p.title.toLowerCase().includes(search));
+  }
+  renderProducts(filtered);
+});
+
+// Search
+searchInput.addEventListener("input", () => {
+  let filtered = [...allProducts];
+  const search = searchInput.value.toLowerCase();
+  if (search) {
+    filtered = filtered.filter(p => p.title.toLowerCase().includes(search));
+  }
+  // Also apply price filter
+  if (priceFilter.value === "low") filtered.sort((a,b)=>a.price-b.price);
+  if (priceFilter.value === "high") filtered.sort((a,b)=>b.price-a.price);
+  renderProducts(filtered);
+});
+
+// Load categories
+async function loadCategories() {
+  const res = await fetch("https://fakestoreapi.com/products/categories");
+  const categories = await res.json();
+  const container = document.getElementById("categories");
+  container.innerHTML = categories.map(cat => `
+    <button onclick="filterByCategory('${cat}')"
+      class="bg-purple-600 text-white px-3 py-2 rounded">${cat}</button>
+  `).join("");
+}
+
+function filterByCategory(cat) {
+  let filtered = allProducts.filter(p => p.category === cat);
+  // Apply search
+  const search = searchInput.value.toLowerCase();
+  if (search) filtered = filtered.filter(p=>p.title.toLowerCase().includes(search));
+  // Apply price
+  if (priceFilter.value === "low") filtered.sort((a,b)=>a.price-b.price);
+  if (priceFilter.value === "high") filtered.sort((a,b)=>b.price-a.price);
+  renderProducts(filtered);
+}
+
+// Init
+document.addEventListener("DOMContentLoaded", () => {
+  loadAllProducts();
+  loadCategories();
+});
+</script>
+
 </body>
 </html>
