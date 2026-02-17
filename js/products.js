@@ -18,10 +18,10 @@ async function loadTrending() {
     const top3 = data.slice(0, 3);
 
     container.innerHTML = top3.map(product => `
-      <div class="bg-white p-4 rounded shadow">
+      <div class="bg-white p-4 rounded-md shadow-xl border">
         <img src="${product.image}" class="h-40 mx-auto object-contain">
         <h3 class="font-semibold mt-3">${product.title.substring(0,40)}...</h3>
-        <p class="text-purple-600 font-bold">$${product.price}</p>
+        <p class="text-purple-600 font-bold">price: $${product.price}</p>
         <button class="details-btn mt-2 bg-blue-600 text-white px-3 py-1 rounded" data-index="${data.indexOf(product)}">Details</button>
         <button class="add-btn mt-2 bg-purple-600 text-white px-3 py-1 rounded" data-index="${data.indexOf(product)}">Add to Cart</button>
       </div>

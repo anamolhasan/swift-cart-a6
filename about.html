@@ -7,24 +7,56 @@
      <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-   <!-- Navbar -->
-<header class="bg-black text-white shadow-lg sticky top-0 z-50">
+<!-- ================= Navbar ================= -->
+<header class="bg-white shadow sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-purple-400">SwiftCart</h1>
 
-    <nav class="hidden md:flex space-x-6">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+    <!-- Left: Logo -->
+    <h1 class="text-2xl font-bold text-indigo-600">
+      SwiftCart
+    </h1>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex space-x-8 font-medium text-gray-700">
+      <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+      <a href="products.html" class="hover:text-indigo-600 transition">Products</a>
+      <a href="about.html" class="hover:text-indigo-600 transition">About</a>
+      <a href="contact.html" class="hover:text-indigo-600 transition">Contact</a>
     </nav>
 
-    <div id="cart-btn" class="relative cursor-pointer">
-      🛒
-      <span id="cart-count" class="absolute -top-2 -right-3 bg-purple-500 text-xs px-2 rounded-full">0</span>
+    <!-- Right Side -->
+    <div class="flex items-center gap-4">
+
+      <!-- Cart -->
+      <div id="cart-btn" class="relative cursor-pointer text-xl">
+        🛒
+        <span id="cart-count" 
+              class="absolute -top-2 -right-3 bg-indigo-600 text-white text-xs px-2 rounded-full">
+          0
+        </span>
+      </div>
+
+      <!-- Hamburger -->
+      <button id="menu-btn" class="md:hidden text-2xl text-gray-700">
+        ☰
+      </button>
+
     </div>
+
   </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow">
+    <nav class="flex flex-col px-6 py-4 space-y-4 text-gray-700 font-medium">
+      <a href="index.html" class="hover:text-indigo-600">Home</a>
+      <a href="products.html" class="hover:text-indigo-600">Products</a>
+      <a href="about.html" class="hover:text-indigo-600">About</a>
+      <a href="contact.html" class="hover:text-indigo-600">Contact</a>
+    </nav>
+  </div>
+
 </header>
+
 
 <!-- Cart Modal -->
 <div id="cart-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center z-50">

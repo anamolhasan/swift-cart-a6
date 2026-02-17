@@ -4,57 +4,97 @@
   <meta charset="UTF-8">
   <title>SwiftCart - Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
+
 </head>
  <body>
-   <!-- Navbar -->
-<header class="bg-black text-white shadow-lg sticky top-0 z-50">
+<!-- ================= Navbar ================= -->
+<header class="bg-white shadow sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-purple-400">SwiftCart</h1>
 
-    <nav class="hidden md:flex space-x-6">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+    <!-- Left: Logo -->
+    <h1 class="text-2xl font-bold text-indigo-600">
+      SwiftCart
+    </h1>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex space-x-8 font-medium text-gray-700">
+      <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+      <a href="products.html" class="hover:text-indigo-600 transition">Products</a>
+      <a href="about.html" class="hover:text-indigo-600 transition">About</a>
+      <a href="contact.html" class="hover:text-indigo-600 transition">Contact</a>
     </nav>
 
-    <div id="cart-btn" class="relative cursor-pointer">
-      🛒
-      <span id="cart-count" class="absolute -top-2 -right-3 bg-purple-500 text-xs px-2 rounded-full">0</span>
+    <!-- Right Side -->
+    <div class="flex items-center gap-4">
+
+      <!-- Cart -->
+      <div id="cart-btn" class="relative cursor-pointer text-xl">
+        🛒
+        <span id="cart-count" 
+              class="absolute -top-2 -right-3 bg-indigo-600 text-white text-xs px-2 rounded-full">
+          0
+        </span>
+      </div>
+
+      <!-- Hamburger -->
+      <button id="menu-btn" class="md:hidden text-2xl text-gray-700">
+        ☰
+      </button>
+
     </div>
+
   </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow">
+    <nav class="flex flex-col px-6 py-4 space-y-4 text-gray-700 font-medium">
+      <a href="index.html" class="hover:text-indigo-600">Home</a>
+      <a href="products.html" class="hover:text-indigo-600">Products</a>
+      <a href="about.html" class="hover:text-indigo-600">About</a>
+      <a href="contact.html" class="hover:text-indigo-600">Contact</a>
+    </nav>
+  </div>
+
 </header>
 
 
-<!-- banner  -->
- <!-- ================= Hero Section ================= -->
-  <section 
-    class="relative h-screen bg-cover bg-center flex items-center justify-center"
-    style="background-image: url('./Assets/banner-image.png');"
-  >
-    
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
-    <!-- Content -->
-    <div class="relative text-center text-white px-6">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+
+<!-- banner  -->
+<!-- ================= Hero Section ================= -->
+<section 
+  class="relative h-[70vh] flex items-center"
+  style="background-image: url('./Assets/banner-image.png'); background-size: cover; background-position: center;"
+>
+
+  <!-- Gradient Overlay (Left Dark → Right Transparent) -->
+  <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+
+  <!-- Content -->
+  <div class="relative max-w-7xl mx-auto px-6 w-full">
+    <div class="max-w-xl text-white">
+
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
         Best Collection For You
       </h1>
 
-      <p class="text-lg md:text-2xl mb-8">
-        Discover the latest fashion & exclusive deals
+      <p class="text-base md:text-lg text-gray-200 mb-8">
+        Discover the latest trends in fashion, electronics, and more. 
+        Shop with confidence and style at SwiftCart.
       </p>
 
       <button 
         id="shopBtn"
-        class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-lg text-lg font-semibold transition duration-300"
+        class="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded-lg text-lg font-semibold transition duration-300 shadow-lg"
       >
         Shop Now
       </button>
-    </div>
 
-  </section>
+    </div>
+  </div>
+
+</section>
 
 
 <!-- Cart Modal -->
@@ -69,33 +109,76 @@
   </div>
 </div>
 
- <!-- ================= Features Section ================= -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-gray-800">Why Choose Us</h2>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <h3 class="text-xl font-bold mb-3">🚚 Fast Delivery</h3>
-          <p>Quick and safe product delivery.</p>
+<!-- ================= Features Section ================= -->
+<section class="py-20 bg-white relative overflow-hidden">
+  
+  <!-- Background Decoration -->
+  <div class="absolute top-0 left-0 w-72 h-72 bg-indigo-100 rounded-full blur-3xl opacity-40 -z-10"></div>
+  <div class="absolute bottom-0 right-0 w-72 h-72 bg-pink-100 rounded-full blur-3xl opacity-40 -z-10"></div>
+
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-gray-800">
+      Why Choose Us
+    </h2>
+    <p class="text-gray-500 mb-12 max-w-2xl mx-auto">
+      We provide premium service with modern technology and customer satisfaction.
+    </p>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- Card 1 -->
+      <div class="group bg-white border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-3">
+        <div class="text-4xl mb-4 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
+          🚚
         </div>
-        <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <h3 class="text-xl font-bold mb-3">💳 Secure Payment</h3>
-          <p>Your payments are fully protected.</p>
-        </div>
-        <div class="bg-gradient-to-br from-green-400 via-emerald-400 to-teal-500 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <h3 class="text-xl font-bold mb-3">📞 24/7 Support</h3>
-          <p>Support team always ready to help.</p>
-        </div>
-        <div class="bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <h3 class="text-xl font-bold mb-3">⭐ Top Quality</h3>
-          <p>Only best quality products available.</p>
-        </div>
+        <h3 class="text-xl font-semibold mb-3 text-gray-800">Fast Delivery</h3>
+        <p class="text-gray-500 text-sm">
+          Lightning fast and secure delivery system across the country.
+        </p>
       </div>
+
+      <!-- Card 2 -->
+      <div class="group bg-white border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-3">
+        <div class="text-4xl mb-4 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
+          💳
+        </div>
+        <h3 class="text-xl font-semibold mb-3 text-gray-800">Secure Payment</h3>
+        <p class="text-gray-500 text-sm">
+          Multiple safe payment options with full encryption security.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group bg-white border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-3">
+        <div class="text-4xl mb-4 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
+          📞
+        </div>
+        <h3 class="text-xl font-semibold mb-3 text-gray-800">24/7 Support</h3>
+        <p class="text-gray-500 text-sm">
+          Our support team is always ready to assist you anytime.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="group bg-white border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-3">
+        <div class="text-4xl mb-4 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
+          ⭐
+        </div>
+        <h3 class="text-xl font-semibold mb-3 text-gray-800">Top Quality</h3>
+        <p class="text-gray-500 text-sm">
+          We ensure only premium quality products for our customers.
+        </p>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
 
 
+<!-- trending products -->
   <section class="py-16">
   <div class="max-w-6xl mx-auto px-4">
     <h2 class="text-3xl font-bold text-center mb-8">
@@ -108,15 +191,51 @@
   </div>
 </section>
 
+<!-- ================= Newsletter Section ================= -->
+<section class="py-20 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="bg-white rounded-3xl shadow-xl p-10 md:p-16 text-center">
 
-<!-- ================= Newsletter ================= -->
-  <section class="bg-indigo-600 text-white py-16 text-center">
-    <h2 class="text-3xl font-bold mb-6">Subscribe To Our Newsletter</h2>
-    <form class="flex flex-col md:flex-row justify-center gap-4 max-w-xl mx-auto">
-      <input type="email" placeholder="Enter your email" class="px-4 py-3 rounded-lg text-gray-800 w-full" required />
-      <button type="submit" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">Subscribe</button>
-    </form>
-  </section>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+        Stay Updated
+      </h2>
+
+      <p class="text-gray-500 mb-8 max-w-xl mx-auto">
+        Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.
+      </p>
+
+      <!-- Form -->
+      <form id="newsletterForm" 
+            class="flex flex-col sm:flex-row items-center gap-4 max-w-2xl mx-auto">
+
+        <input 
+          type="email"
+          placeholder="Enter your email address"
+          required
+          class="flex-1 w-full px-6 py-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+        />
+
+        <button 
+          type="submit"
+          class="bg-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-indigo-700 transition w-full sm:w-auto"
+        >
+          Subscribe
+        </button>
+
+      </form>
+
+      <!-- Success Message -->
+      <p id="newsletterMsg" class="mt-6 text-green-600 font-medium hidden">
+        ✔ Successfully Subscribed!
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
 
 
 
