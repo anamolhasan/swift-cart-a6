@@ -119,3 +119,8 @@ function addProductEventListeners(productsArray) {
     btn.addEventListener("click", () => addToCart(productsArray[idx]));
   });
 }
+
+
+ document.getElementById("shopBtn").addEventListener("click", function() {
+      window.location.href = "products.html";
+    });
