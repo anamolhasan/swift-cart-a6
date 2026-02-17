@@ -17,15 +17,15 @@ async function loadTrending() {
 
     const top3 = data.slice(0, 3);
 
-    container.innerHTML = top3.map(product => `
-      <div class="bg-white p-4 rounded-md shadow-xl border">
-        <img src="${product.image}" class="h-40 mx-auto object-contain">
-        <h3 class="font-semibold mt-3">${product.title.substring(0,40)}...</h3>
-        <p class="text-purple-600 font-bold">price: $${product.price}</p>
-        <button class="details-btn mt-2 bg-blue-600 text-white px-3 py-1 rounded" data-index="${data.indexOf(product)}">Details</button>
-        <button class="add-btn mt-2 bg-purple-600 text-white px-3 py-1 rounded" data-index="${data.indexOf(product)}">Add to Cart</button>
-      </div>
-    `).join("");
+   container.innerHTML = top3.map(product => `
+  <div class="bg-white p-4 rounded-md shadow-xl border">
+    <img src="${product.image}" class="h-40 mx-auto object-contain">
+    <h3 class="font-semibold mt-3">${product.title.substring(0,40)}...</h3>
+    <p class="text-purple-600 font-bold">price: $${product.price}</p>
+    <button class="details-btn mt-2 bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">Details</button>
+    <button class="add-btn mt-2 bg-purple-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
+  </div>
+`).join("");
 
     addProductEventListeners(top3);
   } catch(err) {
@@ -95,12 +95,12 @@ async function loadProducts(category) {
         <h3 class="font-semibold mt-3">${product.title.substring(0,40)}...</h3>
         <p class="text-yellow-500">⭐ ${product.rating.rate}</p>
         <p class="text-purple-600 font-bold">$${product.price}</p>
-        <button class="details-btn mt-2 bg-blue-600 text-white px-3 py-1 rounded" data-index="${products.indexOf(product)}">Details</button>
-        <button class="add-btn mt-2 bg-purple-600 text-white px-3 py-1 rounded" data-index="${products.indexOf(product)}">Add to Cart</button>
+        <button class="details-btn mt-2 bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">Details</button>
+        <button class="add-btn mt-2 bg-purple-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
       </div>
     `).join("");
 
-    addProductEventListeners(products);
+    addProductEventListeners(products); // ইভেন্ট লিসেনার অ্যাড করা হচ্ছে
   } catch(err) {
     container.innerHTML = "Failed to load products.";
     console.error(err);
@@ -110,17 +110,50 @@ async function loadProducts(category) {
 // Attach event listeners to dynamically created buttons
 function addProductEventListeners(productsArray) {
   document.querySelectorAll(".details-btn").forEach(btn => {
-    const idx = btn.dataset.index;
-    btn.addEventListener("click", () => showDetails(productsArray[idx]));
+    btn.onclick = () => { // addEventListener এর বদলে সরাসরি onclick ব্যবহার করলে ডুপ্লিকেট হবে না
+      const id = btn.getAttribute("data-id");
+      const product = productsArray.find(p => p.id == id);
+      if (product) showDetails(product);
+    };
   });
 
   document.querySelectorAll(".add-btn").forEach(btn => {
-    const idx = btn.dataset.index;
-    btn.addEventListener("click", () => addToCart(productsArray[idx]));
+    btn.onclick = () => {
+      const id = btn.getAttribute("data-id");
+      const product = productsArray.find(p => p.id == id);
+      if (product) addToCart(product);
+    };
   });
 }
+
 
 
  document.getElementById("shopBtn").addEventListener("click", function() {
       window.location.href = "products.html";
     });
+
+
+    function renderProducts(products) {
+  const container = document.getElementById("products");
+  if (!container) return;
+
+  if (products.length === 0) {
+    container.innerHTML = "<p class='col-span-full text-center'>No products found.</p>";
+    return;
+  }
+
+  container.innerHTML = products.map(product => `
+    <div class="bg-white p-4 rounded shadow">
+      <img src="${product.image}" class="h-40 mx-auto object-contain">
+      <span class="text-xs bg-gray-200 px-2 py-1 rounded">${product.category}</span>
+      <h3 class="font-semibold mt-3">${product.title.substring(0,40)}...</h3>
+      <p class="text-yellow-500">⭐ ${product.rating.rate}</p>
+      <p class="text-purple-600 font-bold">$${product.price}</p>
+      <button class="details-btn mt-2 bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">Details</button>
+      <button class="add-btn mt-2 bg-purple-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
+    </div>
+  `).join("");
+
+  // বাটন রেন্ডার হওয়ার পর লিসেনার অ্যাড করতে হবে
+  addProductEventListeners(products); 
+}

@@ -30,12 +30,23 @@
 
       <!-- Cart -->
       <div id="cart-btn" class="relative cursor-pointer text-xl">
-        🛒
-        <span id="cart-count" 
-              class="absolute -top-2 -right-3 bg-indigo-600 text-white text-xs px-2 rounded-full">
-          0
-        </span>
-      </div>
+  🛒
+  <span id="cart-count" class="absolute -top-2 -right-3 bg-indigo-600 text-white text-xs px-2 rounded-full">
+    0
+  </span>
+</div>
+
+<!-- cart modal -->
+ <div id="cart-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+  <div class="bg-white p-6 rounded w-[90%] md:w-1/2 relative max-h-[80vh] overflow-y-auto">
+    <button id="close-cart" class="absolute top-3 right-4 text-xl font-bold">✖</button>
+    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+    <div id="cart-items" class="space-y-4"></div>
+    <div class="mt-4 font-bold text-right">
+      Total: $<span id="cart-total">0</span>
+    </div>
+  </div>
+</div>
 
       <!-- Hamburger -->
       <button id="menu-btn" class="md:hidden text-2xl text-gray-700">
@@ -57,8 +68,6 @@
   </div>
 
 </header>
-
-
 
 
 <!-- banner  -->
@@ -97,17 +106,6 @@
 </section>
 
 
-<!-- Cart Modal -->
-<div id="cart-modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-  <div class="bg-white p-6 rounded w-[90%] md:w-1/2 relative max-h-[80vh] overflow-y-auto">
-    <button id="close-cart" class="absolute top-3 right-4 text-xl font-bold">✖</button>
-    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
-    <div id="cart-items" class="space-y-4"></div>
-    <div class="mt-4 font-bold text-right">
-      Total: $<span id="cart-total">0</span>
-    </div>
-  </div>
-</div>
 
 <!-- ================= Features Section ================= -->
 <section class="py-20 bg-white relative overflow-hidden">
@@ -282,6 +280,15 @@
 
   </div>
 </footer>
+
+
+<!-- Modal -->
+<div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div id="modal-content" class="bg-white p-6 rounded shadow-lg max-w-lg w-full relative">
+    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-600 font-bold">X</button>
+  </div>
+</div>
+
 
     <!-- script -->
 <script src="./js/cart.js"></script>

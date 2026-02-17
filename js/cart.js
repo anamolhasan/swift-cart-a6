@@ -1,10 +1,17 @@
 // cart.js
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+// cart.js ফাইলে এই অংশটুকু আপডেট করুন
 function updateCartCount() {
-  const count = document.getElementById("cart-count");
-  if (count) count.textContent = cart.length;
+  const countElement = document.getElementById("cart-count");
+  if (countElement) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    countElement.textContent = cart.length;
+  }
 }
+
+// পেজ লোড হওয়ার সাথে সাথে কাউন্ট আপডেট করার জন্য
+document.addEventListener("DOMContentLoaded", updateCartCount);
 
 function addToCart(product) {
   cart.push(product);
